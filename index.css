@@ -1,6 +1,7 @@
 @import url(https://db.onlinewebfonts.com/c/51fbab06334218b0fbd925f5754e21ad?family=Cake+n+Truffles);
 body {
   font-family: "Cake n Truffles";
+  color:#161616;
 }
 
 .container {
@@ -17,6 +18,9 @@ nav {
   width: 80%;
   align-items: center;
 }
+h1{
+  font-size: 40px;
+}
 
 .time {
   display: flex;
@@ -32,3 +36,49 @@ nav {
   margin: 0 5px;
   font-size: 2rem;
 }
+.timeBody{
+  margin-top: 1.2rem;
+  color: #AFA892;
+  display: flex;
+  align-items: center;
+}
+.timeBody > span{
+  margin: 0 1.5rem;
+  font-size: 32px; 
+}
+.text-p{
+  font-size: 15px;
+}
+
+section{
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes zoomInOut {
+    0% {
+      transform: scale(1); /* Start with normal size */
+    }
+    50% {
+      transform: scale(1.2); /* Zoom in to 120% size */
+    }
+    100% {
+      transform: scale(1); /* Return to normal size */
+    }
+  }
+
+  .zoom-image {
+    animation: zoomInOut 4s infinite; /* Adjust timing (5s) and loop (infinite) as needed */
+    width: 200px; /* Adjust image size as needed */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure it's block-level for proper centering */
+    margin: 0 auto; /* Center horizontally */
+  }
+  button{
+    padding: 10px 40px;
+    background: #83ADB6;
+    border-radius: 30px;
+    color:#fff;
+  }
