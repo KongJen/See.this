@@ -14,6 +14,10 @@
     <script>
         let totalTimeInSeconds = 0;
 
+        function resetTime() {
+            totalTimeInSeconds = -1
+        }
+
         function startTimer() {
             setInterval(updateTime, 1000);
         }
@@ -42,7 +46,7 @@
 <body onload="startTimer()">
     <div class="container">
         <nav>
-            <a href="reset.html">Click.this</a>
+            <a onclick="resetTime()">Click.this</a>
             <div class="time">
                 <h1>Time Spent</h1>
                 <p id="hours">00</p>:
