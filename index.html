@@ -88,18 +88,29 @@
                 startTimer();
             }
         });
+        function resetContent() {
+            document.querySelector('.text-p').innerText = "ROCK.";
+            document.querySelector('.zoom-image').src = "./img/rock.png";
+
+        }
 
         function random() {
             const luck = Math.floor(Math.random() * 100);
-            if (luck > 99) {
+            if (luck > 90) {
                 totalTimeInSeconds += 1000;
+                document.querySelector('.text-p').innerText = "YOU’re So lucky \n+1000000 seconds\n+1000000000 aura";
+                document.querySelector('.zoom-image').src = "./img/good_luk.png";
+                setTimeout(() => resetContent(), 10000);
             } else if (luck > 60) {
                 totalTimeInSeconds += 10;
             } else if (luck > 30 && totalTimeInSeconds >= 10) {
                 totalTimeInSeconds -= 10;
             } else {
-                resetTime();
+                resetTime()
+                document.querySelector('.text-p').innerText = "I'm sorry for your bad luck. HAHAHAHAHA";
+                document.querySelector('.zoom-image').src = "./img/bad_luk.png";
             }
+            setTimeout(() => resetContent(), 10000);
         }
 
         function openModal(label, description) {
