@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="index.css">
     <title>See This</title>
     <script>
-        let totalTimeInSeconds = 0;
         let timerInterval;
+        let totalTimeInSeconds = 0;
         const trophies = [
-            { label: "30 Sec", description: "You've wasted 30 seconds.", time: 30 },
-            { label: "5 Minutes", description: "You've wasted 5 minutes.", time: 300 },
-            { label: "1 Hour", description: "You've wasted 1 hour.", time: 3600 }
+            { label: "5 Sec", description: "0.05 seconds", time: 5 },
+            { label: "30 Sec", description: "0.30 seconds", time: 30 },
+            { label: "5 Minutes", description: "5.00 minutes", time: 300 },
+            { label: "1 Hour", description: "1.00 hour", time: 3600 }
         ];
         let earnedTrophies = [];
 
@@ -51,10 +52,10 @@
             const minutes = checkTime(Math.floor((totalTimeInSeconds % 3600) / 60));
             const seconds = checkTime(totalTimeInSeconds % 60);
 
-            document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours;
-            document.getElementById('minutes').textContent = minutes;
-            document.getElementById('seconds').textContent = seconds;
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
             checkTrophies(totalTimeInSeconds);
         }
 
@@ -64,9 +65,11 @@
 
         function checkTrophies(seconds) {
             trophies.forEach(trophy => {
-                if (seconds >= trophy.time && !getCookie(trophy.label)) {
-                    alert("You earned a trophy: " + trophy.label);
+                if (seconds >= trophy.time && !getCookie(trophy.label) && earnedTrophies.indexOf(trophy.label) === -1) {
                     setCookie(trophy.label, "earned", 7);
+                    earnedTrophies.push(trophy.label);
+                    openModal(trophy.label, trophy.description);
+                    setTimeout(() => closeModal(), 10000);
                 }
             });
         }
@@ -77,15 +80,6 @@
             const expires = "expires=" + d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
-
-        function showEarnedTrophies() {
-            earnedTrophies = trophies.filter(trophy => getCookie(trophy.label) === "earned").map(trophy => trophy.description);
-            console.log('earnedTrophies:', earnedTrophies);
-        }
-
-        window.addEventListener('beforeunload', function () {
-            setCookie('currTime', totalTimeInSeconds);
-        });
 
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === "hidden") {
@@ -107,6 +101,22 @@
                 resetTime();
             }
         }
+
+        function openModal(label, description) {
+            document.getElementById('modalDescription').innerText = description;
+            document.getElementById('trophyModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('trophyModal').classList.remove('active');
+        }
+
+        window.addEventListener('beforeunload', function () {
+            trophies.forEach(trophy => {
+                document.cookie = trophy.label + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            });
+        });
+
     </script>
 </head>
 
@@ -139,8 +149,22 @@
                 <img class="gift-left" alt="gift" src="./img/gift.png">
             </div>
         </section>
+        <a href="archieve.html">
+            <img class="badges" alt="gift" src="./img/badges.png">
+        </a>
+        <div id="trophyModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div>
+                    <img class="gift-left" alt="gift" src="./img/cat1.png">
+                    <p>you have wasted your time
+                        looking at cutie pookie wookie rock
+                        for <span id="modalDescription" class="text-highlight">0.01 seconds</span></p>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="./scripts/script.js"></script>
+
 </body>
 
 </html>

@@ -1,10 +1,15 @@
 @import url(https://db.onlinewebfonts.com/c/51fbab06334218b0fbd925f5754e21ad?family=Cake+n+Truffles);
+
+/* Base styles */
 body {
   font-family: "Cake n Truffles";
-  color:#161616;
+  color: #161616;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,6 +26,7 @@ nav {
 
 h1 {
   font-size: 40px;
+  margin: 0;
 }
 
 .time {
@@ -31,7 +37,7 @@ h1 {
 }
 
 .time h1 {
-  margin: 10px;
+  margin: 10px 0;
 }
 
 .time p {
@@ -40,8 +46,8 @@ h1 {
 }
 
 .timeHead {
-  color:#545148;
-  font-size: 15px; 
+  color: #545148;
+  font-size: 15px;
 }
 
 .timeHead > span {
@@ -50,14 +56,14 @@ h1 {
 
 .timeBody {
   margin-top: 1.2rem;
-  color: #AFA892;
+  color: #afa892;
   display: flex;
   align-items: center;
 }
 
 .timeBody > span {
   margin: 0 1.5rem;
-  font-size: 32px; 
+  font-size: 32px;
 }
 
 .text-p {
@@ -73,22 +79,22 @@ section {
 
 @keyframes zoomInOut {
   0% {
-    transform: scale(1); 
+    transform: scale(1);
   }
   50% {
-    transform: scale(1.2); 
+    transform: scale(1.2);
   }
   100% {
-    transform: scale(1); 
+    transform: scale(1);
   }
 }
 
 .zoom-image {
   animation: zoomInOut 4s infinite;
   width: 200px;
-  height: auto; 
-  display: block; 
-  margin: 0 auto; 
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .btn-wrapper {
@@ -98,8 +104,9 @@ section {
   font-family: "Cake n Truffles";
   font-size: 16px;
 }
-.btn-wrapper:hover{
-  scale: 1.05;
+
+.btn-wrapper:hover {
+  transform: scale(1.05);
 }
 
 .btn-wrapper > img.gift-right {
@@ -130,7 +137,7 @@ section {
 button {
   margin-top: 2rem;
   padding: 20px 3rem;
-  background: #83ADB6;
+  background: #83adb6;
   border-radius: 30px;
   color: #fff;
   box-shadow: 0 0 0 2em transparent;
@@ -141,4 +148,75 @@ button {
 
 button:hover {
   background: #6b98a2;
+}
+
+.badges {
+  position: fixed;
+  bottom: 3%;
+  right: 0.5%;
+  cursor: pointer;
+}
+
+/* Modal styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black overlay */
+  overflow: auto; /* Enable scroll if needed */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.active {
+  display: block;
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or */
+  border-radius: 40px;
+  max-width: 741px;
+  text-align: center;
+  transform: scale(0.8);
+  transition: all 0.5s ease-in-out;
+}
+
+.modal.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-content > div {
+  margin-top: 3rem;
+}
+
+.modal-content > div > p {
+  width: 300px;
+  margin: 30px auto;
+}
+
+.close {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.text-highlight {
+  color: #f9b84f;
 }
