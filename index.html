@@ -134,15 +134,12 @@
         }
 
         window.onload = function () {
-            startTimer();
-            playBGSound()
-        };
-
-        window.addEventListener('beforeunload', function () {
             trophies.forEach(trophy => {
                 document.cookie = trophy.label + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             });
-        });
+            startTimer();
+            playBGSound()
+        };
 
     </script>
 </head>
@@ -176,7 +173,7 @@
                 <img class="gift-left" alt="gift" src="./img/gift.png">
             </div>
         </section>
-        <a href="archieve.html">
+        <a href="achieve.html">
             <img class="badges" alt="gift" src="./img/badges.png">
         </a>
         <div id="trophyModal" class="modal">

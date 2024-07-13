@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./achieve.css">
+    <link rel="stylesheet" href="index.css">
+    <title>Achievement</title>
+    <script>
+        let timerInterval;
+        let totalTimeInSeconds = 0;
+        const trophies = [
+            { label: "5 Sec", title: 'Good job!', description: "0.05 seconds", time: 5 },
+            { label: "30 Sec", title: 'AMAZING!', description: "0.30 seconds", time: 30 },
+            { label: "5 Minutes", title: 'CRAZY!', description: "5.00 minutes", time: 300 },
+            { label: "1 Day", title: 'Bro what', description: "1.00 hour", time: 3600 }
+        ];
+        let earnedTrophies = [];
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i].trim();
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function populateBadges() {
+            const container = document.querySelector('.badge-container');
+            trophies.forEach(trophy => {
+                const badgeItem = document.createElement('div');
+                badgeItem.classList.add('badge-item');
+                const imgSrc = getCookie(trophy.label) ? './img/badges.png' : './img/de-badges.png';
+                badgeItem.innerHTML = `
+                    <img alt="gift" src="${imgSrc}">
+                    <h4 class="badge-title">${trophy.title}</h4>
+                    <p class="badge-description">${trophy.description}</p>
+                `;
+                container.appendChild(badgeItem);
+            });
+        }
+
+        window.onload = function () {
+            populateBadges();
+        };
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>achievement hall</h1>
+        <div class="badge-container">
+        </div>
+        <div>
+            <a class="back-text" href="/">back</a>
+        </div>
+    </div>
+</body>
+
+</html>

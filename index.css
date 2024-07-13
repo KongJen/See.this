@@ -220,3 +220,6 @@ button:hover {
 .text-highlight {
   color: #f9b84f;
 }
+a{
+  text-decoration: none;
+}
