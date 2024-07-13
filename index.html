@@ -112,15 +112,21 @@
                 startTimer();
             } 
         })
+
+        function random() {
+            const luck = Math.floor(Math.random() * 100)
+            if (luck <= 30) {
+                resetTime();
+            } else {
+                totalTimeInSeconds = totalTimeInSeconds + 10
+            }
+        }
     </script>
 </head>
 
 <body onload="startTimer()">
     <div class="container">
         <nav>
-            <a onclick="resetTime()">Click.this</a>
-
-
             <div class="time">
                 <h1>YOU WASTE YOUR TIME</h1>
                 <div class="timeHead">
@@ -135,15 +141,13 @@
                     <span id="minutes">00</span>:
                     <span id="seconds">00</span>
                 </div>
-
             </div>
-            <a onclick="showEarnedTrophies()">Trophy</a>
         </nav>
         <br>
         <section class="">
             <img class="zoom-image" alt="just a rock" src="./img/rock.png" alt="">
             <p class="text-p">ROCK.</p>
-            <button>CLICK HERE FOR SURPRISE</button>
+            <button id="surprise" onclick="random()">CLICK HERE FOR SURPRISE</button>
         </section>
     </div>
     <script src="./scripts/script.js"></script>
