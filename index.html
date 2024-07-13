@@ -11,17 +11,46 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+    <script>
+        let totalTimeInSeconds = 0;
+
+        function startTimer() {
+            setInterval(updateTime, 1000);
+        }
+
+        function updateTime() {
+            totalTimeInSeconds++;
+            let hours = Math.floor(totalTimeInSeconds / 3600);
+            let minutes = Math.floor((totalTimeInSeconds % 3600) / 60);
+            let seconds = totalTimeInSeconds % 60;
+
+            hours = checkTime(hours);
+            minutes = checkTime(minutes);
+            seconds = checkTime(seconds);
+
+            document.getElementById('hours').innerHTML = hours;
+            document.getElementById('minutes').innerHTML = minutes;
+            document.getElementById('seconds').innerHTML = seconds;
+        }
+
+        function checkTime(i) {
+            return i < 10 ? "0" + i : i;
+        }
+    </script>
 </head>
 
-<body>
+<body onload="startTimer()">
     <div class="container">
-        <a href="reset.html">Click.this</a>
-        <div class="time">
-            <h1>time</h1>
-            <p>00</p>
-            <p>00</p>
-        </div>   
-        <a href="archive">Tophy</a>
+        <nav>
+            <a href="reset.html">Click.this</a>
+            <div class="time">
+                <h1>Time Spent</h1>
+                <p id="hours">00</p>:
+                <p id="minutes">00</p>:
+                <p id="seconds">00</p>
+            </div>
+            <a href="archive">Tophy</a>
+        </nav>
         <br>
         <img src="./img/rock.png" alt="">
     </div>
