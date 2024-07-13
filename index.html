@@ -11,29 +11,65 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+    <script>
+        let totalTimeInSeconds = 0;
+
+        function resetTime() {
+            totalTimeInSeconds = -1
+        }
+
+        function startTimer() {
+            setInterval(updateTime, 1000);
+        }
+
+        function updateTime() {
+            totalTimeInSeconds++;
+            let days = Math.floor(totalTimeInSeconds / 86400)
+            let hours = Math.floor((totalTimeInSeconds % 86400) / 3600);
+            let minutes = Math.floor((totalTimeInSeconds % 3600) / 60);
+            let seconds = totalTimeInSeconds % 60;
+
+            days = checkTime(days);
+            hours = checkTime(hours);
+            minutes = checkTime(minutes);
+            seconds = checkTime(seconds);
+
+            document.getElementById('days').innerHTML = days;
+            document.getElementById('hours').innerHTML = hours;
+            document.getElementById('minutes').innerHTML = minutes;
+            document.getElementById('seconds').innerHTML = seconds;
+        }
+
+        function checkTime(i) {
+            return i < 10 ? "0" + i : i;
+        }
+    </script>
 </head>
 
-<body>
+<body onload="startTimer()">
     <div class="container">
-        <a href="reset.html">Click.this</a>
-        <h1>Timer</h1>
-        <div class="timeHead">
-            <span class="txt">DAYS</span>
-            <span class="txt">HOURS</span>
-            <span class="txt">MIN</span>
-            <span class="txt">SEC</span>
-        </div>   
-        <div class="timeCount">
-            <span class="digit" id="day">00</span>
-            <span class="txt">:</span>
-            <span class="digit" id="hr">00</span>
-            <span class="txt">:</span>
-            <span class="digit" id="min">00</span>
-            <span class="txt">:</span>
-            <span class="digit" id="sec">00</span>
-            <span class="txt">:</span>
-        </div>   
-        <a href="archive">Tophy</a>
+        <nav>
+            <a onclick="resetTime()">Click.this</a>
+            
+            
+            <div class="time">
+                <h1>YOU WASTE YOUR TIME</h1>
+                <div class="timeHead">
+                    <span>DAYS</span>
+                    <span>HOURS</span>
+                    <span>MIN</span>
+                    <span>SEC</span>
+                </div>
+                <div class="timeBody">
+                    <span id="days">00</span>:
+                    <span id="hours">00</span>:
+                    <span id="minutes">00</span>:
+                    <span id="seconds">00</span>
+                </div>
+                
+            </div>
+            <a href="archive">Trophy</a>
+        </nav>
         <br>
         <img src="./img/rock.png" alt="">
     </div>
