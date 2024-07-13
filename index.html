@@ -6,13 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
     <title>See This</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
     <script>
         let totalTimeInSeconds = 0;
+        let timerInterval;
         const trophies = [
             { label: "30 Sec", description: "You've wasted 30 seconds." },
             { label: "5 Minutes", description: "You've wasted 5 minutes." },
@@ -41,12 +37,20 @@
         }
 
         function startTimer() {
-            const t = getCookie('currTime')
-            if (t) {
-                totalTimeInSeconds = t
+            // const t = getCookie('currTime')
+            // if (t) {
+            //     totalTimeInSeconds = t
+            // }
+            if (!timerInterval) {
+                timerInterval = setInterval(updateTime, 1000);
             }
-            setInterval(updateTime, 1000);
         }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+
 
         function updateTime() {
             totalTimeInSeconds++;
@@ -98,12 +102,20 @@
         }
 
         window.addEventListener('beforeunload', function () {
-            setCookie('currTime', 500)
+            setCookie('currTime', totalTimeInSeconds)
         });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === "hidden") {
+                stopTimer();
+            } else if (document.visibilityState === "visible") {
+                startTimer();
+            } 
+        })
     </script>
 </head>
 
-<body>
+<body onload="startTimer()">
     <div class="container">
         <nav>
             <a onclick="resetTime()">Click.this</a>
