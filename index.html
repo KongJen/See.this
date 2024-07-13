@@ -10,21 +10,18 @@
         let totalTimeInSeconds = 0;
         let timerInterval;
         const trophies = [
-            { label: "30 Sec", description: "You've wasted 30 seconds." },
-            { label: "5 Minutes", description: "You've wasted 5 minutes." },
-            { label: "1 Hour", description: "You've wasted 1 hour." }
+            { label: "30 Sec", description: "You've wasted 30 seconds.", time: 30 },
+            { label: "5 Minutes", description: "You've wasted 5 minutes.", time: 300 },
+            { label: "1 Hour", description: "You've wasted 1 hour.", time: 3600 }
         ];
-        let earnedTrophies = []
+        let earnedTrophies = [];
 
         function getCookie(cname) {
             let name = cname + "=";
             let decodedCookie = decodeURIComponent(document.cookie);
             let ca = decodedCookie.split(';');
             for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
+                let c = ca[i].trim();
                 if (c.indexOf(name) == 0) {
                     return c.substring(name.length, c.length);
                 }
@@ -33,14 +30,10 @@
         }
 
         function resetTime() {
-            totalTimeInSeconds = -1
+            totalTimeInSeconds = -1;
         }
 
         function startTimer() {
-            // const t = getCookie('currTime')
-            // if (t) {
-            //     totalTimeInSeconds = t
-            // }
             if (!timerInterval) {
                 timerInterval = setInterval(updateTime, 1000);
             }
@@ -51,24 +44,18 @@
             timerInterval = null;
         }
 
-
         function updateTime() {
             totalTimeInSeconds++;
-            let days = Math.floor(totalTimeInSeconds / 86400)
-            let hours = Math.floor((totalTimeInSeconds % 86400) / 3600);
-            let minutes = Math.floor((totalTimeInSeconds % 3600) / 60);
-            let seconds = totalTimeInSeconds % 60;
+            const days = checkTime(Math.floor(totalTimeInSeconds / 86400));
+            const hours = checkTime(Math.floor((totalTimeInSeconds % 86400) / 3600));
+            const minutes = checkTime(Math.floor((totalTimeInSeconds % 3600) / 60));
+            const seconds = checkTime(totalTimeInSeconds % 60);
 
-            days = checkTime(days);
-            hours = checkTime(hours);
-            minutes = checkTime(minutes);
-            seconds = checkTime(seconds);
-
-            document.getElementById('days').innerHTML = days;
-            document.getElementById('hours').innerHTML = hours;
-            document.getElementById('minutes').innerHTML = minutes;
-            document.getElementById('seconds').innerHTML = seconds;
-            checkTrophies(totalTimeInSeconds)
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+            checkTrophies(totalTimeInSeconds);
         }
 
         function checkTime(i) {
@@ -76,7 +63,6 @@
         }
 
         function checkTrophies(seconds) {
-            console.log('checkTrophies : ', seconds)
             trophies.forEach(trophy => {
                 if (seconds >= trophy.time && !getCookie(trophy.label)) {
                     alert("You earned a trophy: " + trophy.label);
@@ -88,21 +74,17 @@
         function setCookie(cname, cvalue, exdays) {
             const d = new Date();
             d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            let expires = "expires=" + d.toUTCString();
+            const expires = "expires=" + d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
 
         function showEarnedTrophies() {
-            trophies.forEach(trophy => {
-                if (getCookie(trophy.label) === "earned") {
-                    earnedTrophies.push(`${trophy.description}`)
-                }
-            });
-            console.log('earnedTrophies : ', earnedTrophies)
+            earnedTrophies = trophies.filter(trophy => getCookie(trophy.label) === "earned").map(trophy => trophy.description);
+            console.log('earnedTrophies:', earnedTrophies);
         }
 
         window.addEventListener('beforeunload', function () {
-            setCookie('currTime', totalTimeInSeconds)
+            setCookie('currTime', totalTimeInSeconds);
         });
 
         document.addEventListener('visibilitychange', () => {
@@ -111,16 +93,16 @@
             } else if (document.visibilityState === "visible") {
                 startTimer();
             }
-        })
+        });
 
         function random() {
-            const luck = Math.floor(Math.random() * 100)
+            const luck = Math.floor(Math.random() * 100);
             if (luck > 99) {
-                totalTimeInSeconds = totalTimeInSeconds + 1000;
+                totalTimeInSeconds += 1000;
             } else if (luck > 60) {
-                totalTimeInSeconds = totalTimeInSeconds + 10;
+                totalTimeInSeconds += 10;
             } else if (luck > 30 && totalTimeInSeconds >= 10) {
-                totalTimeInSeconds = totalTimeInSeconds - 10
+                totalTimeInSeconds -= 10;
             } else {
                 resetTime();
             }
@@ -148,10 +130,14 @@
             </div>
         </nav>
         <br>
-        <section class="">
-            <img class="zoom-image" alt="just a rock" src="./img/rock.png" alt="">
+        <section>
+            <img class="zoom-image" alt="just a rock" src="./img/rock.png">
             <p class="text-p">ROCK.</p>
-            <button id="surprise" onclick="random()">CLICK HERE FOR SURPRISE</button>
+            <div class="btn-wrapper">
+                <button id="surprise" onclick="random()">CLICK HERE FOR SURPRISE</button>
+                <img class="gift-right" alt="gift" src="./img/gift.png">
+                <img class="gift-left" alt="gift" src="./img/gift.png">
+            </div>
         </section>
     </div>
     <script src="./scripts/script.js"></script>

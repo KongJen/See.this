@@ -18,7 +18,8 @@ nav {
   width: 80%;
   align-items: center;
 }
-h1{
+
+h1 {
   font-size: 40px;
 }
 
@@ -26,7 +27,7 @@ h1{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin:auto
+  margin: auto;
 }
 
 .time h1 {
@@ -37,28 +38,33 @@ h1{
   margin: 0 5px;
   font-size: 2rem;
 }
-.timeHead{
+
+.timeHead {
   color:#545148;
   font-size: 15px; 
 }
-.timeHead> span{
+
+.timeHead > span {
   margin: 0 1.5rem;
 }
-.timeBody{
+
+.timeBody {
   margin-top: 1.2rem;
   color: #AFA892;
   display: flex;
   align-items: center;
 }
-.timeBody > span{
+
+.timeBody > span {
   margin: 0 1.5rem;
   font-size: 32px; 
 }
-.text-p{
+
+.text-p {
   font-size: 15px;
 }
 
-section{
+section {
   margin-top: 2.5rem;
   display: flex;
   flex-direction: column;
@@ -66,28 +72,73 @@ section{
 }
 
 @keyframes zoomInOut {
-    0% {
-      transform: scale(1); /* Start with normal size */
-    }
-    50% {
-      transform: scale(1.2); /* Zoom in to 120% size */
-    }
-    100% {
-      transform: scale(1); /* Return to normal size */
-    }
+  0% {
+    transform: scale(1); 
   }
+  50% {
+    transform: scale(1.2); 
+  }
+  100% {
+    transform: scale(1); 
+  }
+}
 
-  .zoom-image {
-    animation: zoomInOut 4s infinite; /* Adjust timing (5s) and loop (infinite) as needed */
-    width: 200px; /* Adjust image size as needed */
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Ensure it's block-level for proper centering */
-    margin: 0 auto; /* Center horizontally */
+.zoom-image {
+  animation: zoomInOut 4s infinite;
+  width: 200px;
+  height: auto; 
+  display: block; 
+  margin: 0 auto; 
+}
+
+.btn-wrapper {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-family: "Cake n Truffles";
+  font-size: 16px;
+}
+.btn-wrapper:hover{
+  scale: 1.05;
+}
+
+.btn-wrapper > img.gift-right {
+  position: absolute;
+  top: 5%;
+  left: 85%;
+}
+
+.btn-wrapper > img.gift-left {
+  position: absolute;
+  top: 30%;
+  left: -15%;
+  transform: rotate(300deg);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
   }
-  button{
-    margin-top:2rem;
-    padding: 10px 40px;
-    background: #83ADB6;
-    border-radius: 30px;
-    color:#fff;
+  50% {
+    transform: scale(1.05);
   }
+  100% {
+    transform: scale(1);
+  }
+}
+
+button {
+  margin-top: 2rem;
+  padding: 20px 3rem;
+  background: #83ADB6;
+  border-radius: 30px;
+  color: #fff;
+  box-shadow: 0 0 0 2em transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #6b98a2;
+}
