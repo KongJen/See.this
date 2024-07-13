@@ -115,10 +115,14 @@
 
         function random() {
             const luck = Math.floor(Math.random() * 100)
-            if (luck <= 30) {
-                resetTime();
+            if (luck > 99) {
+                totalTimeInSeconds = totalTimeInSeconds + 1000;
+            } else if (luck > 60) {
+                totalTimeInSeconds = totalTimeInSeconds + 10;
+            } else if (luck > 30 && totalTimeInSeconds >= 10) {
+                totalTimeInSeconds = totalTimeInSeconds - 10
             } else {
-                totalTimeInSeconds = totalTimeInSeconds + 10
+                resetTime();
             }
         }
     </script>
