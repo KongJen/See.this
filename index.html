@@ -13,6 +13,12 @@
         rel="stylesheet">
     <script>
         let totalTimeInSeconds = 0;
+        const trophies = [
+            { label: "30 Sec", description: "You've wasted 30 seconds." },
+            { label: "5 Minutes", description: "You've wasted 5 minutes." },
+            { label: "1 Hour", description: "You've wasted 1 hour." }
+        ];
+        let earnedTrophies = []
 
         function getCookie(cname) {
             let name = cname + "=";
@@ -35,6 +41,10 @@
         }
 
         function startTimer() {
+            const t = getCookie('currTime')
+            if (t) {
+                totalTimeInSeconds = t
+            }
             setInterval(updateTime, 1000);
         }
 
@@ -63,13 +73,6 @@
 
         function checkTrophies(seconds) {
             console.log('checkTrophies : ', seconds)
-            const trophies = [
-                { time: 30, label: "30 Sec" }, // 30 Sec
-                { time: 300, label: "5 Minutes" }, // 5 minutes
-                { time: 3600, label: "1 Hour" } // 1 hour
-                // Add more trophies here as needed
-            ];
-
             trophies.forEach(trophy => {
                 if (seconds >= trophy.time && !getCookie(trophy.label)) {
                     alert("You earned a trophy: " + trophy.label);
@@ -84,6 +87,19 @@
             let expires = "expires=" + d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
+
+        function showEarnedTrophies() {
+            trophies.forEach(trophy => {
+                if (getCookie(trophy.label) === "earned") {
+                    earnedTrophies.push(`${trophy.description}`)
+                }
+            });
+            console.log('earnedTrophies : ', earnedTrophies)
+        }
+
+        window.addEventListener('beforeunload', function () {
+            setCookie('currTime', 500)
+        });
     </script>
 </head>
 
@@ -109,7 +125,7 @@
                 </div>
 
             </div>
-            <a href="archive">Trophy</a>
+            <a onclick="showEarnedTrophies()">Trophy</a>
         </nav>
         <br>
         <img src="./img/rock.png" alt="">
