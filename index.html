@@ -22,6 +22,10 @@
             setInterval(updateTime, 1000);
         }
 
+        function stopTimer() {
+        clearInterval(timerInterval);
+    }
+
         function updateTime() {
             totalTimeInSeconds++;
             let days = Math.floor(totalTimeInSeconds / 86400)
@@ -43,10 +47,23 @@
         function checkTime(i) {
             return i < 10 ? "0" + i : i;
         }
+        document.addEventListener("visibilitychange", () => {
+            var state = document.visibilityState;
+
+            if (state === 'hidden') {
+                stopTimer();
+            }
+            if (state === 'visible') {
+                startTimer();
+            }
+        });
+
+        // Start the timer initially
+        startTimer();
     </script>
 </head>
 
-<body onload="startTimer()">
+<body>
     <div class="container">
         <nav>
             <a onclick="resetTime()">Click.this</a>
