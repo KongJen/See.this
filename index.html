@@ -39,6 +39,10 @@
                 timerInterval = setInterval(updateTime, 1000);
             }
         }
+        function playBGSound() {
+            const audio = new Audio('sound-effect/Evening-Improvisation-with-Ethera(chosic.com).mp3');
+            audio.play();
+        }
 
         function playSoundEffect() {
             const audio = new Audio('sound-effect/muehehehe.mp3');
@@ -85,6 +89,7 @@
             const expires = "expires=" + d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
+        playBGSound()
 
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === "hidden") {
@@ -128,6 +133,11 @@
             document.getElementById('trophyModal').classList.remove('active');
         }
 
+        window.onload = function () {
+            startTimer();
+            playBGSound()
+        };
+
         window.addEventListener('beforeunload', function () {
             trophies.forEach(trophy => {
                 document.cookie = trophy.label + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -137,7 +147,7 @@
     </script>
 </head>
 
-<body onload="startTimer()">
+<body>
     <div class="container">
         <nav>
             <div class="time">
