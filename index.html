@@ -89,7 +89,7 @@
         function surpriseBtn(seconds) {
             var w = document.getElementById("btn-wrapper");
             const sur = Math.floor(Math.random() * 100);
-            if (sur > 50) {
+            if (sur > 60) {
                 if ((seconds % 10) == 0 && w.style.display == "none") {
                     w.style.display = "block"
                 }
@@ -127,12 +127,15 @@
                 document.querySelector('.text-p').innerText = "YOU’re So lucky \n+1000000 seconds\n+1000000000 aura";
                 document.querySelector('.zoom-image').src = "./img/good_luk.png";
                 setTimeout(() => resetContent(), 10000);
-            } else if (luck > 60) {
+            } else if (luck > 50) {
                 totalTimeInSeconds += 10;
                 document.querySelector('.text-p').innerText = "+10 seconds";
             } else if (luck > 30 && totalTimeInSeconds >= 10) {
                 totalTimeInSeconds -= 10;
                 document.querySelector('.text-p').innerText = "-10 seconds";
+            } else if (luck > 30) {
+                totalTimeInSeconds -= 1;
+                document.querySelector('.text-p').innerText = "-1 seconds";
             } else {
                 resetTime()
                 document.querySelector('.text-p').innerText = "I'm sorry for your bad luck. HAHAHAHAHA";
