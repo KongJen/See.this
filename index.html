@@ -66,6 +66,7 @@
             document.getElementById('minutes').innerText = minutes;
             document.getElementById('seconds').innerText = seconds;
             checkTrophies(totalTimeInSeconds);
+            surpriseBtn(totalTimeInSeconds);
         }
 
         function checkTime(i) {
@@ -81,6 +82,19 @@
                     setTimeout(() => closeModal(), 10000);
                 }
             });
+        }
+
+        function surpriseBtn(seconds) {
+            var w = document.getElementById("btn-wrapper");
+            const sur = Math.floor(Math.random() * 100);
+            if (sur > 50) {
+                if ((seconds % 10) == 0 && w.style.display == "none") {
+                    w.style.display = "block"
+                }
+            } else if ((seconds % 5) == 0 && w.style.display == "block") {
+                w.style.display = "none"
+            }
+            
         }
 
         function setCookie(cname, cvalue, exdays) {
@@ -167,7 +181,7 @@
         <section>
             <img class="zoom-image" alt="just a rock" src="./img/rock.png">
             <p class="text-p">ROCK.</p>
-            <div class="btn-wrapper">
+            <div class="btn-wrapper" id="btn-wrapper" style="display:none;">
                 <button id="surprise" onclick="random()">CLICK HERE FOR SURPRISE</button>
                 <img class="gift-right" alt="gift" src="./img/gift.png">
                 <img class="gift-left" alt="gift" src="./img/gift.png">

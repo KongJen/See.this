@@ -118,7 +118,7 @@ section {
 .btn-wrapper > img.gift-left {
   position: absolute;
   top: 30%;
-  left: -15%;
+  left: -12%;
   transform: rotate(300deg);
 }
 
