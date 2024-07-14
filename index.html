@@ -8,7 +8,7 @@
     <title>See This</title>
     <script>
         let timerInterval;
-        let totalTimeInSeconds = localStorage.getItem("timeWasted") ? localStorage.getItem("timeWasted") 0;
+        let totalTimeInSeconds = localStorage.getItem("timeWasted") ? localStorage.getItem("timeWasted") : 0;
         const trophies = [
             { label: "5 Sec", description: "0.05 seconds", time: 5 },
             { label: "30 Sec", description: "0.30 seconds", time: 30 },
