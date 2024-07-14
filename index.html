@@ -123,14 +123,16 @@
         function random() {
             const luck = Math.floor(Math.random() * 100);
             if (luck > 99) {
-                totalTimeInSeconds += 1000;
+                totalTimeInSeconds += 1000000;
                 document.querySelector('.text-p').innerText = "YOU’re So lucky \n+1000000 seconds\n+1000000000 aura";
                 document.querySelector('.zoom-image').src = "./img/good_luk.png";
                 setTimeout(() => resetContent(), 10000);
             } else if (luck > 60) {
                 totalTimeInSeconds += 10;
+                document.querySelector('.text-p').innerText = "+10 seconds";
             } else if (luck > 30 && totalTimeInSeconds >= 10) {
                 totalTimeInSeconds -= 10;
+                document.querySelector('.text-p').innerText = "-10 seconds";
             } else {
                 resetTime()
                 document.querySelector('.text-p').innerText = "I'm sorry for your bad luck. HAHAHAHAHA";
